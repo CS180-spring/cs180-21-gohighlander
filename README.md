@@ -10,6 +10,9 @@
 ## Project Description
 A web app that saves students’ schedule information into an easy-to-read schedule and gathers parking lot occupancy each hour during weekdays to display an occupancy forecast.
 
+##Interface Documentation
+API Interfaces:
+@app.route("/api/get_schedule.php", methods=['GET'])
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/gohighlander01.jpg)
