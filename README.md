@@ -8,7 +8,17 @@
 
 
 ## Project Description
-A web app that saves students’ schedule information into an easy-to-read schedule and gathers parking lot occupancy each hour during weekdays to display an occupancy forecast.
+A web app that saves students’ schedule information into an easy-to-read schedule and gathers parking lot occupancy each hour during weekdays to display an occupancy forecast. The project is important to us because as college students we need to be organized as we need to drive to school for classes, discussions, exams, etc. Students who use this program would be able to stay organized and thus be able to keep their focus on their eductation. It will be interesting to see how to develop new features from a user's perspective. 
+
+Features:
+* Edit task information
+* Add new task
+* Delete task
+* Set priority of task
+* Create subtasks within larger tasks
+* Display current tasks
+* Group tasks by different classifications
+
 
 ## Interface Documentation
 
