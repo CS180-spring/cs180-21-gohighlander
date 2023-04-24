@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<script>
+		function login() {
+			event.preventDefault();
+
+			var form = document.getElementById("login-form");
+			var url = "/api/login.php";
+			var data = new FormData(form);
+
+			fetch(url, {
+				method: 'POST',
+				body: data
+			})
+			.then(response => response.text())
+			.then(data => {
+				if(data == 'logged_in'){
+					alert('Login successful!');
+                    window.location.href = "/";
+				}else{
+					alert(data);
+				}
+			})
+			.catch(error => {
+				console.error('Error submitting form:', error);
+				alert('Error submitting form. Please try again.');
+			});
+		}
+	</script>
+</head>
+<body>
+	<h1>Login to GoHighlander</h1>
+	<form id="login-form" onsubmit="login()">
+		<label for="name">Username:</label>
+		<input type="text" id="name" name="name" required><br><br>
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" required><br><br>
+		<a href="register.php">Register</a><br/><br/>
+		<input type="submit" value="Login">
+	</form>
+</body>
+</html>

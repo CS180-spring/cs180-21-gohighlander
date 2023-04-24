@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+	<script>
+		function register() {
+			event.preventDefault(); //prevent default form submit action
+
+			var form = document.getElementById("register-form");
+			var url = "/api/register.php"; //replace with your backend script URL
+			var data = new FormData(form);
+
+			fetch(url, {
+				method: 'POST',
+				body: data
+			})
+			.then(response => response.text())
+			.then(data => {
+				if(data == 'success'){
+					alert('Registration successful!');
+					window.location.href = "/login.php";
+				}else{
+					alert(data);
+				}
+			})
+			.catch(error => {
+				console.error('Error submitting form:', error);
+				alert('Error submitting form. Please try again.');
+			});
+		}
+	</script>
+</head>
+<body>
+	<h1>Register</h1>
+	<form id="register-form" onsubmit="register()">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br><br>
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" required><br><br>
+		<a href="login.php">Already Have An Accunt?</a><br/><br/>
+		<input type="submit" value="Register">
+	</form>
+</body>
+</html>
