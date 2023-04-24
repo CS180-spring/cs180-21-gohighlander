@@ -39,6 +39,8 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 `/api/save_schedule.php` - accepts POST request with parameter `sh`, returns success if saved correctly.
 
+> Note: This web application is written using python Flask, the `.php` file extension acts as a disguise.
+
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg)
