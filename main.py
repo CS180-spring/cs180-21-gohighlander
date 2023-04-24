@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, session, redirect, url_for, requests
+from flask import Flask, render_template, send_from_directory, session, redirect, url_for, request
 import json
 
 app = Flask(__name__)
@@ -62,6 +62,8 @@ def loginphp():
                 session['logged_in'] = True
                 session['username'] = username
                 return "logged_in"
+            else: 
+                return "Username or Password Wrong"
         else:
             return "Username or Password Wrong"
 
@@ -71,7 +73,7 @@ def register():
     if session.get('logged_in'):
         return redirect(url_for('index'))
     else:
-        return render_template('register.html')
+        return render_template('register.html') 
 
 
 @app.route("/api/register.php", methods=['POST'])
