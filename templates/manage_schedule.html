@@ -254,7 +254,7 @@
 			const formData = new FormData();
 					formData.append('sh', textToGzip(JSON.stringify(courseDatas)));
 
-					fetch('/api/save_schedule.php', {
+					await fetch('/api/save_schedule.php', {
 					  method: 'POST',
 					  body: formData
 					})
@@ -331,7 +331,7 @@
 				  const formData = new FormData();
 					formData.append('sh', courseCode);
 
-					fetch('/api/save_schedule.php', {
+					await fetch('/api/save_schedule.php', {
 					  method: 'POST',
 					  body: formData
 					})
