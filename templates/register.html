@@ -8,6 +8,9 @@
 		function register() {
 			event.preventDefault(); //prevent default form submit action
 
+			var username = document.getElementById("name").value;
+			var password = document.getElementById("password").value;
+
 			//verify regex
 			if (!usernameRegex.test(username)) {
 				alert("Username must be at least 5 characters and can only contain letters, numbers, and underscores.");
