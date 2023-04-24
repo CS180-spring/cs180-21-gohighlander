@@ -3,11 +3,24 @@
 <head>
 	<title>Register</title>
 	<script>
+		const usernameRegex = /^[a-zA-Z0-9_]{5,}$/;
+		const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 		function register() {
 			event.preventDefault(); //prevent default form submit action
 
+			//verify regex
+			if (!usernameRegex.test(username)) {
+				alert("Username must be at least 5 characters and can only contain letters, numbers, and underscores.");
+				return false;
+			}
+
+			if (!passwordRegex.test(password)) {
+				alert("Password must be at least 8 characters and contain at least one letter and one number.");
+				return false;
+			}
+
 			var form = document.getElementById("register-form");
-			var url = "/api/register.php"; //replace with your backend script URL
+			var url = "/api/register.php";
 			var data = new FormData(form);
 
 			fetch(url, {
