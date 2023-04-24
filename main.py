@@ -37,12 +37,33 @@ def login():
 
 @app.route('/logout.php')
 def logout():
+    session.pop('logged_in', None)
+    session.pop('username', None)
     return redirect(url_for('login'))
 
 
 @app.route("/api/login.php", methods=['POST'])
 def loginphp():
-    return "logged_in"
+    if session.get('logged_in'):
+        return "logged_in"
+    else:
+        username = request.form['name'].lower()
+        password = request.form['password']
+        # check if username or password empty
+        if not username or not password:
+            return "Username or Password Empty"
+
+        # check username
+        with open('users.json', 'r') as f:
+            users = json.load(f)
+
+        if username in users:
+            if users[username]['password'] == password:
+                session['logged_in'] = True
+                session['username'] = username
+                return "logged_in"
+        else:
+            return "Username or Password Wrong"
 
 
 @app.route("/register.php")
