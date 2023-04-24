@@ -338,6 +338,7 @@
 					.then(response => response.text())
 					.then(data => console.log(data))
 					.catch(error => console.error(error));
+			  	addSavedCourse();
 				Swal.fire("Successfully Added Course!");
 		   }catch{
 				Swal.fire("Invalid Course Code");
