@@ -55,7 +55,28 @@ def register():
 
 @app.route("/api/register.php", methods=['POST'])
 def registerphp():
-    return "success"
+    if session.get('logged_in'):
+        return "success"
+    else:
+        # session['logged_in'] = True
+        username = request.form['name'].lower()
+        password = request.form['password']
+        # check if username or password empty
+        if not username or not password:
+            return "Username or Password Empty"
+        # check username
+        with open('users.json', 'r') as f:
+            users = json.load(f)
+
+        if username not in users:
+            users[username] = {}
+            users[username]['password'] = password
+            users[username]['permission'] = '0'  # 0 as regular user
+            with open('users.json', 'w') as json_file:
+                json.dump(users, json_file)
+            return "success"
+        else:
+            return "User Exists"
 
 
 @app.route("/api/get_schedule.php", methods=['GET'])
