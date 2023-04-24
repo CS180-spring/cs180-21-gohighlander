@@ -3,7 +3,7 @@
 # GoHighlander
 
  
- > Authors: [Kevin Qu](https://github.com/KevinDevs) []() []() []()
+ > Authors: [Kevin Qu](https://github.com/KevinDevs) [Wesley Fan](https://github.com/wesleyfan2015) []() []()
 
 
 
