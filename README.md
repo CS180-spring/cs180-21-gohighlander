@@ -31,13 +31,13 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 `/api/check_session` - returns yes or no, if the user is logged in
 
-`/api/login.php` - takes two POST parameters: name and password. returns logged_in on success and error message if failed.
+`/api/login.php` - takes two POST parameters: `name` and `password`. returns `logged_in` on success and error message if failed.
 
-`/api/register.php` - takes two POST parameters: name and password, returns success on success and error message if failed.
+`/api/register.php` - takes two POST parameters: `name` and `password`, returns `success` on success and error message if failed.
 
 `/api/get_schedule.php` - accepts GET request, and returns gzipped course informations in JSON
 
-`/api/save_schedule.php` - accepts POST request with parameter sh, returns success if saved correctly.
+`/api/save_schedule.php` - accepts POST request with parameter `sh`, returns success if saved correctly.
 
 
  ## Screenshots
