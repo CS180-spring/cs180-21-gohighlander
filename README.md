@@ -12,7 +12,22 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 ##Interface Documentation
 API Interfaces:
-@app.route("/api/get_schedule.php", methods=['GET'])
+
+Frontend Interfaces:
+index.php - Dashboard for this app, displays links to pages
+login.php - Login page for users
+register.php - Registration page for users
+my_schedule.php - Displays courses in order for each day of the week
+add_course.php - Allows users to add courses to their schedule
+manage_schedule.php - Allows users to delete added schedule from the courses list
+
+Backend Interfaces:
+/api/check_session - returns yes or no, if the user is logged in
+/api/login.php - takes two POST parameters: name and password. returns logged_in on success and error message if failed.
+/api/register.php - takes two POST parameters: name and password, returns success on success and error message if failed.
+/api/get_schedule.php - accepts GET request, and returns gzipped course informations in JSON
+/api/save_schedule.php - accepts POST request with parameter sh, returns success if saved correctly.
+
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/gohighlander01.jpg)
