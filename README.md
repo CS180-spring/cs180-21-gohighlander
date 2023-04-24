@@ -41,7 +41,7 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 
  ## Screenshots
- ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/gohighlander01.jpg)
+ ![Screenshots]([https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/gohighlander01.jpg](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg))
  ## Installation/Usage
  > pip install -r requirements.txt
  
