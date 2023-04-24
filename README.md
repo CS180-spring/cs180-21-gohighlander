@@ -3,7 +3,7 @@
 # GoHighlander
 
  
- > Authors: [Kevin Qu](https://github.com/KevinDevs) [Wesley Fan](https://github.com/wesleyfan2015) [Haolin Liu](https://github.com/terrylhl) []()
+ > Authors: [Kevin Qu](https://github.com/KevinDevs) [Wesley Fan](https://github.com/wesleyfan2015) [Haolin Liu](https://github.com/terrylhl) [Tiffany Wang](https://github.com/twang0323)
 
 
 
