@@ -3,8 +3,24 @@
 <head>
 	<title>Login</title>
 	<script>
+		const usernameRegex = /^[a-zA-Z0-9_]{5,}$/;
+		const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
 		function login() {
 			event.preventDefault();
+
+			var username = document.getElementById("name").value;
+			var password = document.getElementById("password").value;
+
+			if (!usernameRegex.test(username)) {
+				alert("Username must be at least 5 characters and can only contain letters, numbers, and underscores.");
+				return false;
+			}
+
+			if (!passwordRegex.test(password)) {
+				alert("Password must be at least 8 characters and contain at least one letter and one number.");
+				return false;
+			}
 
 			var form = document.getElementById("login-form");
 			var url = "/api/login.php";
@@ -17,7 +33,7 @@
 			.then(response => response.text())
 			.then(data => {
 				if(data == 'logged_in'){
-					alert('Login successful!');
+					//alert('Login successful!');
                     window.location.href = "/";
 				}else{
 					alert(data);
