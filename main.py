@@ -79,7 +79,16 @@ def save_schedule():
 
 @app.route("/my_schedule.php")
 def my_schedule():
-    return render_template("my_schedule.html")
+    if session.get('logged_in'):
+        with open('schedules.json', 'r') as f:
+            schedules = json.load(f)
+        if session['username'] in schedules:
+            userScheduleCode = schedules[session['username']]
+        else:
+            userScheduleCode = ''
+        return render_template("my_schedule.html", userScheduleCode=userScheduleCode)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/static/gzip.js')
