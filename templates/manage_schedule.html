@@ -329,7 +329,7 @@
 			  	}
 				var courseCode = gzipToText(formValues[0]);
 				  const formData = new FormData();
-					formData.append('sh', courseCode);
+					formData.append('sh', formValues[0]);
 
 					await fetch('/api/save_schedule.php', {
 					  method: 'POST',
