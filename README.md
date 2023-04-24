@@ -12,7 +12,7 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 ## Interface Documentation
 
-# Frontend Interfaces:
+### Frontend Interfaces:
 
 index.php - Dashboard for this app, displays links to pages
 
@@ -27,7 +27,7 @@ add_course.php - Allows users to add courses to their schedule
 manage_schedule.php - Allows users to delete added schedule from the courses list
 
 
-# Backend Interfaces:
+### Backend Interfaces:
 
 /api/check_session - returns yes or no, if the user is logged in
 
