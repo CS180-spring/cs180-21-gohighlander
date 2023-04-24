@@ -60,7 +60,16 @@ def registerphp():
 
 @app.route("/api/get_schedule.php", methods=['GET'])
 def get_schedule():
-    return "eJzFlm1v2kgQx7/KyG/ak3zgtYOboFxUYtwEFQzCzqH21BeLvcR7MV60aytHTv3unYUQDCT0AaK+QTszyzA7v/3P8s//RixKqZjR1KtMSKNpyNvxW8sEl5hA3MYfhmkkTMWSzwoucoxHvncddLxWF7x+r3ejl1GnH4S4cZks4kWGGQ0/uBqSU2sEf4JlEQyPS54lPL/F2JWQichhRIs7niu4plmGG6QQUwwSy7LQKuYznabL4qKUDB0TGpdZMQ/olCkMDCSfUjmHTq4KWcaFkE04p5BKNvnrzZTyrBBNlVIp8vH7MpY1lpRvLuCylIXITQgXkfM6vTgfy/rF3ixjkee8ditpSqeVVFcLhwmXOrzOhJXiKSY0UwwPYTQxLS7u16505Zs8+VTEp/qw5N3i6GxlntraVG1aaNM6qVtO3bZsR+9ZOd26dbZyLgkE5XTMZAWBzsHiJ/cjjkRhdcaoFelmM6lbH84kAoJFtq9fzZfuh2vDGQFyQo50PWx383pgGaLMtq6F7bgn62sxEvJOpWL2evdim+Pj6n5FT3N89D0D8tSpgrTJ64BcNm4JMhwMfxrkPqF3gmjYb994Gh9EfQj7H6JRa+gDFtMJfH/YCa52qHohlvmc4nt4SMmxSRDGHGiegJ/f8pwxXWdF+8Q9kvQfUv4vp7WHlIoK5s9omvipY2vIj0C/x3jpe0LsbGrVaRyEeNG5fULthf4xhTpAfl5n0PVD6H+AkX8Jbf9vv9sf9Pwgeo4rWXC1t7i2solkCfRqOAbnMdse5SfvSIUnHQtJkdb815BmM0U59qTCc4CejJrQLeN4P9DK9H1ZtY1NpO7BSMkOUruC9LL/6bp7TKjtTugN/ciHMBqicm+G/u7g1VWRBcrG1tQtyoTlBYTYS6YUeGhgzesBXNVmm6u4VEr/7C+xpHEquOU0Kiw99JjQyth/OB6Y3D+Dn8W5JVD36DTJDs1GZQCH3jFZHjZ/f6dOFW5NNnXaQw+OXP3AxqIoDlcq2WRrv8LwPVyp+57Xn5Lq9mv6Xak6jSM9oyxjOa1h/CHFZaHu6HumQ7U127ASNMHXX/ix/9V3XLc6Y/PavcgmldsyQtOEj6vw9n/rH3yud4a78+rjoPpe7xkHX74B9ZAVcA=="
+    if session.get('logged_in'):
+        with open('schedules.json', 'r') as f:
+            schedules = json.load(f)
+        if session['username'] in schedules:
+            userScheduleCode = schedules[session['username']]
+        else:
+            userScheduleCode = ''
+        return userScheduleCode
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route("/save_schedule.php")
@@ -84,7 +93,20 @@ def icsjs():
 
 @app.route("/api/save_schedule.php", methods=['POST'])
 def save_schedulephp():
-    return "success"
+    if session.get('logged_in'):
+        scheduleHash = request.form['sh']
+
+        with open('schedules.json', 'r') as f:
+            schedules = json.load(f)
+
+        schedules[session['username']] = scheduleHash
+
+        with open('schedules.json', 'w') as json_file:
+            json.dump(schedules, json_file)
+
+        return "success"
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route("/add_course.php")
