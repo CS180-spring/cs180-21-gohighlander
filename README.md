@@ -52,11 +52,11 @@ Features:
 ### Backend Interfaces:
 | URL  | Method  | Request Params  |  Responses |  Description |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-|  /api/check_session |  GET |  - | 'yes'/'no'  | Returns yes or no, if the user is logged in  |
-| /api/login.php  | POST  | name, password  | 'logged_in' / error_msg   | Returns logged_in on success and error message if failed  |
-|  /api/register.php |  POST | name, password  | 'success'/error_msg  | Returns success on success and error message if failed.  |
+|  /api/check_session |  GET |  - | `yes`/`no`  | Returns yes or no, if the user is logged in  |
+| /api/login.php  | POST  | name, password  | `logged_in` / error_msg   | Returns logged_in on success and error message if failed  |
+|  /api/register.php |  POST | name, password  | `success`/error_msg  | Returns success on success and error message if failed.  |
 | /api/get_schedule.php  |  GET | -  | courses_gzipped  | Returns gzipped course informations in JSON  |
-| /api/save_schedule.php  | POST  | sh  | 'success'  | Saves Gzipped courses into JSON database returns success if saved correctly  |
+| /api/save_schedule.php  | POST  | sh  | `success`  | Saves Gzipped courses into JSON database returns success if saved correctly  |
 
 
  ## Screenshots
