@@ -29,7 +29,7 @@ Features:
 * Set full schedule
 * Save schedule and access through all devices
 * Check avaliable parking spaces
-* Added web application to home screen for easy access
+* Added web application to home screen for easy accesses
 
 
 ## Interface Documentation
