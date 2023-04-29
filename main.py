@@ -184,6 +184,13 @@ def manageschedule():
 def parkingjson():
     return send_from_directory(app.static_folder, 'parking.json')
 
+@app.route("/parking.php")
+def parkingphp():
+    if session.get('logged_in'):
+        return render_template('parking.html')
+    else:
+        return redirect(url_for('login'))
+
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
     app.config['SESSION_TYPE'] = 'filesystem'
