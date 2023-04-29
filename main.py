@@ -179,7 +179,10 @@ def courseadd():
 @app.route("/manage_schedule.php")
 def manageschedule():
     return render_template('manage_schedule.html')
-
+    
+@app.route('/static/parking.json')
+def parkingjson():
+    return send_from_directory(app.static_folder, 'parking.json')
 
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
