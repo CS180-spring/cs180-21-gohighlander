@@ -10,7 +10,6 @@
 ## Project Description
 A web app that saves students’ schedule information into an easy-to-read schedule and gathers parking lot occupancy each hour during weekdays to display an occupancy forecast. The project is important to us because as college students we need to be organized as we need to drive to school for classes, discussions, exams, etc. Students who use this program would be able to stay organized and thus be able to keep their focus on their eductation. It will be interesting to see how to develop new features from a user's perspective. The languages/tools/technologies we plan to use are:
 * Python - Primary Programming language we use in this project
-* PHP - General-purpose scripting language geared toward web development
 * HTML - Hypertext markup language, the system for displaying material retrieved over the Internet
 * CSS - Style our HTML document by describing the presentation of Web pages, including colors, layout, and fonts
 * JS (JavaScript) - types and operators, standard built-in objects, and methods
