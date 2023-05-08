@@ -50,7 +50,7 @@ Features:
 
 ### Backend Interfaces:
 | URL  | Method  | Permission  | Request Params  |  Responses |  Description |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
 |  /api/check_session |  GET | 0 |  - | `yes`/`no`  | Returns yes or no, if the user is logged in  |
 | /api/login.php  | POST  | 0 | name, password  | `logged_in` / error_msg   | Returns logged_in on success and error message if failed  |
 |  /api/register.php |  POST | 0 | name, password  | `success`/error_msg  | Returns success on success and error message if failed.  |
