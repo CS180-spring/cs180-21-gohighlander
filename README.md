@@ -56,7 +56,8 @@ Features:
 |  /api/register.php |  POST | name, password  | `success`/error_msg  | Returns success on success and error message if failed.  |
 | /api/get_schedule.php  |  GET | -  | courses_gzipped  | Returns gzipped course informations in JSON  |
 | /api/save_schedule.php  | POST  | sh  | `success`  | Saves Gzipped courses into JSON database returns success if saved correctly  |
-
+| /api/get_users.php  | GET  | -  | users_JSON  | Returns all usernames in the database.   |
+| /api/remove_user.php  | GET  | username  | success / Unauthorized  | Deletes username by given username. Returns Unauthorized if user does not have sufficient permission |
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg)
