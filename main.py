@@ -212,7 +212,9 @@ def removeuserphp():
 
         with open('schedules.json', 'r') as f:
             scheduleJSON = json.load(f)
-        # TODO: check if deleting user have >= permission
+        # check if deleting user have >= permission
+        if int(usersJSON[username]['permission']) >= int(session.get('permission')):
+            return "Can not delete user with same permission or larger permission"
         # handle access violation
         if username in usersJSON:
             del usersJSON[username]
