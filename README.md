@@ -49,17 +49,17 @@ Features:
 
 
 ### Backend Interfaces:
-| URL  | Method  | Request Params  |  Responses |  Description |
+| URL  | Method  | Permission  | Request Params  |  Responses |  Description |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-|  /api/check_session |  GET |  - | `yes`/`no`  | Returns yes or no, if the user is logged in  |
-| /api/login.php  | POST  | name, password  | `logged_in` / error_msg   | Returns logged_in on success and error message if failed  |
-|  /api/register.php |  POST | name, password  | `success`/error_msg  | Returns success on success and error message if failed.  |
-| /api/get_schedule.php  |  GET | -  | courses_gzipped  | Returns gzipped course informations in JSON  |
-| /api/save_schedule.php  | POST  | sh  | `success`  | Saves Gzipped courses into JSON database returns success if saved correctly  |
-| /api/get_users.php  | GET  | -  | users_JSON  | Returns all usernames in the database.   |
-| /api/remove_user.php  | GET  | username  | success / Unauthorized  | Deletes username by given username. Returns Unauthorized if user does not have sufficient permission |
-| /api/change_password.php  | GET  | username, password  | Operation Success / Unauthorized  | Changes a user's password. Returns Unauthorized if user does not have 1+ permission or insufficient permission to change a username's password. |
-| /api/change_permission.php  | GET  | username,perm  | Operation Success / Unauthorized | Changes a user's permission. Returns Unauthorized if user have insufficient permission to change a username's password.   |
+|  /api/check_session |  GET | 0 |  - | `yes`/`no`  | Returns yes or no, if the user is logged in  |
+| /api/login.php  | POST  | 0 | name, password  | `logged_in` / error_msg   | Returns logged_in on success and error message if failed  |
+|  /api/register.php |  POST | 0 | name, password  | `success`/error_msg  | Returns success on success and error message if failed.  |
+| /api/get_schedule.php  |  GET | 0 | -  | courses_gzipped  | Returns gzipped course informations in JSON  |
+| /api/save_schedule.php  | POST  | 0 | sh  | `success`  | Saves Gzipped courses into JSON database returns success if saved correctly  |
+| /api/get_users.php  | GET  | 1 | -  | users_JSON  | Returns all usernames in the database.   |
+| /api/remove_user.php  | GET  | 1 | username  | success / Unauthorized  | Deletes username by given username. Returns Unauthorized if user does not have sufficient permission |
+| /api/change_password.php  | GET  | 1 | username, password  | Operation Success / Unauthorized  | Changes a user's password. Returns Unauthorized if user does not have 1+ permission or insufficient permission to change a username's password. |
+| /api/change_permission.php  | GET  | 1 | username,perm  | Operation Success / Unauthorized | Changes a user's permission. Returns Unauthorized if user have insufficient permission to change a username's password.   |
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg)
