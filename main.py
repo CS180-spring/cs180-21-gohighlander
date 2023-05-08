@@ -3,7 +3,8 @@ import json
 
 app = Flask(__name__)
 
-#use session['logged_in'] boolean to verify login
+
+# use session['logged_in'] boolean to verify login
 
 @app.route("/")
 def indexredir():
@@ -61,8 +62,9 @@ def loginphp():
             if users[username]['password'] == password:
                 session['logged_in'] = True
                 session['username'] = username
+                session['permission'] = users[username]['permission']
                 return "logged_in"
-            else: 
+            else:
                 return "Username or Password Wrong"
         else:
             return "Username or Password Wrong"
@@ -73,7 +75,7 @@ def register():
     if session.get('logged_in'):
         return redirect(url_for('index'))
     else:
-        return render_template('register.html') 
+        return render_template('register.html')
 
 
 @app.route("/api/register.php", methods=['POST'])
@@ -139,6 +141,7 @@ def my_schedule():
 def gzipjs():
     return send_from_directory(app.static_folder, 'gzip.js')
 
+
 @app.route('/static/ics.js')
 def icsjs():
     return send_from_directory(app.static_folder, 'ics.js')
@@ -169,6 +172,7 @@ def addcourse():
     else:
         return redirect(url_for('login'))
 
+
 @app.route("/course.php")
 def courseadd():
     if session.get('logged_in'):
@@ -176,20 +180,69 @@ def courseadd():
     else:
         return redirect(url_for('login'))
 
+
 @app.route("/manage_schedule.php")
 def manageschedule():
     return render_template('manage_schedule.html')
-    
-@app.route('/static/parking.json')
-def parkingjson():
-    return send_from_directory(app.static_folder, 'parking.json')
+
+
+@app.route("/api/get_users.php")
+def getusersphp():
+    if session.get('logged_in') and session.get('permission') == "1":
+        with open('users.json', 'r') as f:
+            usersJSON = json.load(f)
+            users = []
+            for user in usersJSON:
+                users.append(user)
+            return json.dumps(users)
+    else:
+        return "Unauthorized"
+
+
+@app.route("/api/remove_user.php", methods=['GET'])
+def removeuserphp():
+    if session.get('logged_in') and session.get('permission') == "1":
+        username = request.args.get('username')
+        # prevent deleting self
+        if username == session.get('username'):
+            return "Can't delete your self"
+        # get json
+        with open('users.json', 'r') as f:
+            usersJSON = json.load(f)
+
+        with open('schedules.json', 'r') as f:
+            scheduleJSON = json.load(f)
+        # TODO: check if deleting user have >= permission
+        # handle access violation
+        if username in usersJSON:
+            del usersJSON[username]
+            # delete schedule
+            if username in scheduleJSON:
+                del scheduleJSON[username]
+        else:
+            return "Username Not Exist"
+        # save it back
+        with open('users.json', 'w') as json_file:
+            json.dump(usersJSON, json_file)
+        with open('schedules.json', 'w') as json_file:
+            json.dump(scheduleJSON, json_file)
+
+        return "success"
+
+    else:
+        return "Unauthorized"
 
 @app.route("/parking.php")
-def parkingphp():
+def parking():
     if session.get('logged_in'):
         return render_template('parking.html')
     else:
         return redirect(url_for('login'))
+
+@app.route('/static/parking.json')
+def parkingjson():
+    return send_from_directory(app.static_folder, 'parking.json')
+
 
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
