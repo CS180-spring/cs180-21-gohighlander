@@ -64,7 +64,10 @@ Features:
  ## Installation/Usage
  > pip install -r requirements.txt
  
- > pip main.py
+ > python main.py
+ 
+ Production
+ > gunicorn main:app -b IP:PORT
  ## Testing
  > TBD
 
