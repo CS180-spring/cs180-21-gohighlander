@@ -59,7 +59,7 @@ Features:
 | /api/get_users.php  | GET  | -  | users_JSON  | Returns all usernames in the database.   |
 | /api/remove_user.php  | GET  | username  | success / Unauthorized  | Deletes username by given username. Returns Unauthorized if user does not have sufficient permission |
 | /api/change_password.php  | GET  | username, password  | Operation Success / Unauthorized  | Changes a user's password. Returns Unauthorized if user does not have 1+ permission or insufficient permission to change a username's password. |
-
+| /api/change_permission.php  | GET  | username,perm  | Operation Success / Unauthorized | Changes a user's permission. Returns Unauthorized if user have insufficient permission to change a username's password.   |
 
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg)
