@@ -262,6 +262,40 @@ def changepasswordphp():
     else:
         return "Unauthorized"
 
+@app.route("/api/change_permission.php")
+def changepermissionphp():
+    if session.get('logged_in') and int(session.get('permission')) >= 1:
+        username = request.args.get('username')
+        permission = request.args.get('perm')
+        if not username or not permission:
+            return "Missing parameters"
+        if not permission.isdigit():
+            return "Wrong Parameter"
+
+        with open('users.json', 'r') as f:
+            usersJSON = json.load(f)
+            #run checks
+            if username not in usersJSON:
+                return "User does not exist"
+
+            if int(usersJSON[username]['permission']) >= int(session.get('permission')):
+                return "Can not change user with same permission or larger permission"
+
+            if int(permission) >= int(session.get('permission')):
+                return "Can not change permission larger or equal to your current permission"
+
+            #do work
+            usersJSON[username]['permission'] = permission
+
+            # save it back
+            with open('users.json', 'w') as json_file:
+                json.dump(usersJSON, json_file)
+
+            return "Operation Success"
+
+    else:
+        return "Unauthorized"
+
 
 @app.route("/parking.php")
 def parking():
