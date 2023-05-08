@@ -64,6 +64,7 @@ Features:
  ## Installation/Usage
  > pip install -r requirements.txt
  
+ Development
  > python main.py
  
  Production
