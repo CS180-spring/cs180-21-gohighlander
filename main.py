@@ -232,6 +232,37 @@ def removeuserphp():
     else:
         return "Unauthorized"
 
+
+@app.route("/api/change_password.php")
+def changepasswordphp():
+    if session.get('logged_in') and int(session.get('permission')) >= 1:
+        username = request.args.get('username')
+        password = request.args.get('password')
+        if not username or not password:
+            return "Missing parameters"
+
+        with open('users.json', 'r') as f:
+            usersJSON = json.load(f)
+            #run checks
+            if username not in usersJSON:
+                return "User does not exist"
+
+            if int(usersJSON[username]['permission']) >= int(session.get('permission')):
+                return "Can not change user with same permission or larger permission"
+
+            #do work
+            usersJSON[username]['password'] = password
+
+            # save it back
+            with open('users.json', 'w') as json_file:
+                json.dump(usersJSON, json_file)
+
+            return "Operation Success"
+
+    else:
+        return "Unauthorized"
+
+
 @app.route("/parking.php")
 def parking():
     if session.get('logged_in'):
