@@ -309,6 +309,13 @@ def parking():
 @app.route('/static/parking.json')
 def parkingjson():
     return send_from_directory(app.static_folder, 'parking.json')
+    
+@app.route("/admin")
+def admin():
+    if session.get('logged_in') and int(session.get('permission')) >= 1:
+        return render_template('admin.html')
+    else:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
