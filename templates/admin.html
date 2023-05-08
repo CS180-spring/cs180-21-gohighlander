@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GoHighlnader Admin</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>GoHighlander Admin</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="user-list">
+			</tbody>
+		</table>
+	</div>
+
+	<!-- jQuery and Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		$.getJSON("/api/get_users.php", function(users) {
+			$.each(users, function(i, user) {
+				var row = '<tr>' +
+					'<td>' + user + '</td>' +
+					'<td>' +
+						'<button class="btn btn-info change-password" data-username="' + user + '">Change Password</button>&nbsp' +
+						'<button class="btn btn-info change-permission" data-username="' + user + '">Change Permission</button>&nbsp' +
+						'<button class="btn btn-danger delete-user" data-username="' + user + '">Delete User</button>' +
+					'</td>' +
+				'</tr>';
+				$('#user-list').append(row);
+			});
+			//TODO: Add regex
+			$('.change-password').click(function() {
+				var username = $(this).data('username');
+				Swal.fire({
+					title: 'Enter Password',
+					input: 'text',
+					inputAttributes: {
+						autocapitalize: 'off'
+					},
+					showCancelButton: true,
+					confirmButtonText: 'Change',
+					showLoaderOnConfirm: true,
+					preConfirm: (pass) => {
+						return fetch(`/api/change_password.php?username=`+username+`&password=`+pass)
+							.then(response => {
+								if (!response.ok) {
+									throw new Error(response.statusText);
+								}
+								return response.text(); // Return the response text
+							})
+							.then(data => {
+								return data; // Return the response text
+							})
+							.catch(error => {
+								Swal.showValidationMessage(`Request failed: ${error}`);
+							});
+					},
+					allowOutsideClick: () => !Swal.isLoading()
+				}).then((data) => {console.log(data)
+						if(data.isConfirmed){
+							Swal.fire({
+								title: `Change Password`,
+								text: data.value
+							});
+						}
+				});
+			});
+
+			$('.change-permission').click(function() {
+				var username = $(this).data('username');
+				Swal.fire({
+					title: 'Enter Permission',
+					text: '0: Regular User, 1: Admin, 2: Super Admin',
+					input: 'text',
+					inputAttributes: {
+						autocapitalize: 'off'
+					},
+					showCancelButton: true,
+					confirmButtonText: 'Change',
+					showLoaderOnConfirm: true,
+					preConfirm: (perm) => {
+						return fetch(`/api/change_permission.php?username=`+username+`&perm=`+perm)
+							.then(response => {
+								if (!response.ok) {
+									throw new Error(response.statusText);
+								}
+								return response.text(); // Return the response text
+							})
+							.then(data => {
+								return data; // Return the response text
+							})
+							.catch(error => {
+								Swal.showValidationMessage(`Request failed: ${error}`);
+							});
+					},
+					allowOutsideClick: () => !Swal.isLoading()
+				}).then((data) => {
+					if(data.isConfirmed){
+							Swal.fire({
+								title: `Change Permission`,
+								text: data.value
+							});
+						}
+				});
+
+			});
+
+			$('.delete-user').click(function() {
+				var username = $(this).data('username');
+				console.log("Delete user: " + username);
+				$.get("/api/remove_user.php?username="+username, function(data) {
+							if (data === "success") {
+								swal.fire("Success", "The request was successful", "success").then((result) => {location.reload();})
+							} else {
+								swal.fire("Error", data, "error");
+							}
+						});
+			});
+		});
+	</script>
+</body>
+</html>
