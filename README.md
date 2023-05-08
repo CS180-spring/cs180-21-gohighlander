@@ -61,6 +61,7 @@ Features:
 | /api/change_password.php  | GET  | 1 | username, password  | Operation Success / Unauthorized  | Changes a user's password. Returns Unauthorized if user does not have 1+ permission or insufficient permission to change a username's password. |
 | /api/change_permission.php  | GET  | 1 | username,perm  | Operation Success / Unauthorized | Changes a user's permission. Returns Unauthorized if user have insufficient permission to change a username's password.   |
 
+> Permission `0` is regular user, `1` is Admin, `2` is Super Admin
  ## Screenshots
  ![Screenshots](https://raw.githubusercontent.com/CS180-spring/cs180-21-gohighlander/main/screenshots/cs180.jpg)
  ## Installation/Usage
