@@ -324,13 +324,8 @@ def logo192():
 @app.route("/favicon.ico")
 def favicon():
     return send_from_directory(app.static_folder, 'favicon.ico')
-    
-if __name__ == "__main__":
-    app.secret_key = 'GoHighlanderAAA'
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.run(port=3000)
 
-@app.route("/api/admin_get_schedule.php", methods=['GET'])
+  @app.route("/api/admin_get_schedule.php", methods=['GET'])
 def admin_get_schedule():
     username = request.args.get('username')
     if not username:
@@ -365,3 +360,9 @@ def admin_save_schedulephp():
         return "success"
     else:
         return "Unauthorized"
+
+if __name__ == "__main__":
+    app.secret_key = 'GoHighlanderAAA'
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.run(port=3000)
+
