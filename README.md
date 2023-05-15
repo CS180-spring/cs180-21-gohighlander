@@ -20,13 +20,15 @@ A web app that saves students’ schedule information into an easy-to-read sched
 
 
 Features:
-* Login and logout of account
+* Login and logout of accounts
+* Create accounts
 * Get help for changing password
-* Delete account permanentley.
+* Delete accounts permanentley
 * Add new courses for schedule
 * Delete new courses for schedule
 * Set full schedule
 * Save schedule and access through all devices
+* Login with multiple devices
 * Check avaliable parking spaces
 * Added web application to home screen for easy accesses
 
