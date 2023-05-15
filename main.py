@@ -317,7 +317,14 @@ def admin():
     else:
         return redirect(url_for('login'))
 
+@app.route("/images/192x192.png")
+def logo192():
+    return send_from_directory(app.static_folder, '192x192.png')
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(app.static_folder, 'favicon.ico')
+    
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
     app.config['SESSION_TYPE'] = 'filesystem'
