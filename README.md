@@ -62,6 +62,8 @@ Features:
 | /api/remove_user.php  | GET  | 1 | username  | success / Unauthorized  | Deletes username by given username. Returns Unauthorized if user does not have sufficient permission |
 | /api/change_password.php  | GET  | 1 | username, password  | Operation Success / Unauthorized  | Changes a user's password. Returns Unauthorized if user does not have 1+ permission or insufficient permission to change a username's password. |
 | /api/change_permission.php  | GET  | 1 | username,perm  | Operation Success / Unauthorized | Changes a user's permission. Returns Unauthorized if user have insufficient permission to change a username's password.   |
+| /api/admin_get_schedule.php  | GET  | 1 | username  | Operation Success / Unauthorized | Get user's schedule gzipped hash, returns `Unauthorized` if permission <=0   |
+| /api/admin_save_schedule.php  | GET  | 1 | username, sh  | success / Unauthorized | Saves a gzipped hash schedule information to specific username, returns `Unauthorized` if permission <=0   |
 
 > Permission `0` is regular user, `1` is Admin, `2` is Super Admin
  ## Screenshots
