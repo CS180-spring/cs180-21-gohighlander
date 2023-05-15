@@ -329,3 +329,39 @@ if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
     app.config['SESSION_TYPE'] = 'filesystem'
     app.run(port=3000)
+
+@app.route("/api/admin_get_schedule.php", methods=['GET'])
+def admin_get_schedule():
+    username = request.args.get('username')
+    if not username:
+        return "Missing parameters"
+    if session.get('logged_in') and int(session.get('permission')) >= 1:
+        with open('schedules.json', 'r') as f:
+            schedules = json.load(f)
+        if username in schedules:
+            userScheduleCode = schedules[username]
+        else:
+            userScheduleCode = ''
+        return userScheduleCode
+    else:
+        return "Unauthorized"
+
+#use eJyLjgUAARUAuQ== for empty schedule
+@app.route("/api/admin_save_schedule.php", methods=['GET'])
+def admin_save_schedulephp():
+    username = request.args.get('username')
+    scheduleHash = request.args.get('sh')
+    if not username or not scheduleHash:
+        return "Missing parameters"
+    if session.get('logged_in') and int(session.get('permission')) >= 1:
+        with open('schedules.json', 'r') as f:
+            schedules = json.load(f)
+
+        schedules[username] = scheduleHash
+
+        with open('schedules.json', 'w') as json_file:
+            json.dump(schedules, json_file)
+
+        return "success"
+    else:
+        return "Unauthorized"
