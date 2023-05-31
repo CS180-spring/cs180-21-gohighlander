@@ -14,7 +14,7 @@ A web app that saves students’ schedule information into an easy-to-read sched
 * CSS - Style our HTML document by describing the presentation of Web pages, including colors, layout, and fonts
 * JS (JavaScript) - types and operators, standard built-in objects, and methods
 * Vue - Progressive framework for building user interfaces
-* GitHub - A code hosting platform for version control and collaboration.
+* GitHub - A code hosting platform for version control and collaboration
 * Git - Version Control System
 * Frontend Languages: HTML, CSS, JS, Vue
 
