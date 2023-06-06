@@ -358,10 +358,10 @@ def admin_get_schedule():
         return "Unauthorized"
 
 #use eJyLjgUAARUAuQ== for empty schedule
-@app.route("/api/admin_save_schedule.php", methods=['GET'])
+@app.route("/api/admin_save_schedule.php", methods=['POST'])
 def admin_save_schedulephp():
-    username = request.args.get('username')
-    scheduleHash = request.args.get('sh')
+    username = request.form['username']
+    scheduleHash = request.form['sh']
     if not username or not scheduleHash:
         return "Missing parameters"
     if session.get('logged_in') and int(session.get('permission')) >= 1:
