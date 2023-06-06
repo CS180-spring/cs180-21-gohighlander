@@ -200,7 +200,7 @@ def manageschedule():
 
 @app.route("/api/get_users.php")
 def getusersphp():
-    if session.get('logged_in') and session.get('permission') == "1":
+    if session.get('logged_in') and session.get('permission') >= "1":
         with open('users.json', 'r') as f:
             usersJSON = json.load(f)
             users = []
@@ -213,7 +213,7 @@ def getusersphp():
 
 @app.route("/api/remove_user.php", methods=['GET'])
 def removeuserphp():
-    if session.get('logged_in') and session.get('permission') == "1":
+    if session.get('logged_in') and session.get('permission') >= "1":
         username = request.args.get('username')
         # prevent deleting self
         if username == session.get('username'):
