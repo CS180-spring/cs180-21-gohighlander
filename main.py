@@ -365,6 +365,37 @@ def admin_save_schedulephp():
     else:
         return "Unauthorized"
 
+def verifySession():
+    username = session['username']
+    password = session['password']
+    # check if username or password empty
+    if not username or not password:
+        return "Username or Password Empty"
+
+    # check username
+    with open('users.json', 'r') as f:
+        users = json.load(f)
+
+    if username in users:
+        if users[username]['password'] == password:
+            session['logged_in'] = True
+            session['username'] = username
+            session['permission'] = users[username]['permission']
+            session['password'] = users[username]['password']
+            return True
+        else:
+            session.pop('logged_in', None)
+            session.pop('username', None)
+            session.pop('permission', None)
+            session.pop('password', None)
+            return redirect(url_for('login'))
+    else:
+        session.pop('logged_in', None)
+        session.pop('username', None)
+        session.pop('permission', None)
+        session.pop('password', None)
+        return redirect(url_for('login'))
+        
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
     app.config['SESSION_TYPE'] = 'filesystem'
