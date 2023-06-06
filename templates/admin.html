@@ -34,6 +34,7 @@
 					'<td>' +
 						'<button class="btn btn-info change-password" data-username="' + user + '">Change Password</button>&nbsp' +
 						'<button class="btn btn-info change-permission" data-username="' + user + '">Change Permission</button>&nbsp' +
+						'<button class="btn btn-info user-schedule" data-username="' + user + '">User Schedule</button>&nbsp' +
 						'<button class="btn btn-danger delete-user" data-username="' + user + '">Delete User</button>' +
 					'</td>' +
 				'</tr>';
@@ -126,6 +127,12 @@
 								swal.fire("Error", data, "error");
 							}
 						});
+			});
+
+			$('.user-schedule').click(function() {
+				var username = $(this).data('username');
+				location.href = "/manage_schedule_admin.php?username="+username
+
 			});
 		});
 	</script>
