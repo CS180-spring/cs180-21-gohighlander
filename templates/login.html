@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center mt-5">Login to GoHighlander</h1>
+		<form id="login-form" class="mt-5">
+			<div class="form-group">
+				<label for="name">Username:</label>
+				<input type="text" class="form-control" id="name" name="name" required>
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" class="form-control" id="password" name="password" required>
+			</div>
+
+			<a href="register.php" class="float-right">Need An Account?</a><br/>
+
+			<button type="button" class="btn btn-primary float-right btn-block" style=" margin-top: 10px; " onclick="login()">Login</button>
+		</form>
+	</div>
+
+	<!-- Include Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<!-- Include custom script -->
+	<script>
+		const usernameRegex = /^[a-zA-Z0-9_]{5,}$/;
+		const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+		function login() {
+
+			var username = document.getElementById("name").value;
+			var password = document.getElementById("password").value;
+
+			if (!usernameRegex.test(username)) {
+				alert("Username must be at least 5 characters and can only contain letters, numbers, and underscores.");
+				return false;
+			}
+
+			if (!passwordRegex.test(password)) {
+				alert("Password must be at least 8 characters and contain at least one letter and one number.");
+				return false;
+			}
+
+			var form = document.getElementById("login-form");
+			var url = "/api/login.php";
+			var data = new FormData(form);
+
+			fetch(url, {
+				method: 'POST',
+				body: data
+			})
+			.then(response => response.text())
+			.then(data => {
+				if(data == 'logged_in'){
+					//alert('Login successful!');
+                    window.location.href = "/";
+				}else{
+					alert(data);
+				}
+			})
+			.catch(error => {
+				console.error('Error submitting form:', error);
+				alert('Error submitting form. Please try again.');
+			});
+		}
+	</script>
+</body>
+</html>

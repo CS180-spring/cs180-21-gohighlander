@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Save Schedule</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js" integrity="sha512-EAKzSKex+PXC0U9OG13r1059ysjrjkJEpZoONCnZa0mBROY28iBOOxZSErUVw1LzLr2+U5PhR7zPCPKidUVJqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/static/gzip.js"></script>
+	<script>
+		async function enterCCode(){
+
+			const { value: formValues } = await Swal.fire({
+			  title: 'Enter your code code here:',
+			  html:
+				'<input id="courseCodeEnter" class="swal1-input">',
+			  focusConfirm: false,
+			  preConfirm: () => {
+				return [
+				  document.getElementById('courseCodeEnter').value
+				]
+			  }
+			})
+
+			if (formValues) {
+			  try{
+					if(!formValues[0] || formValues[0] == " "){
+						Swal.fire("Invalid Course Code");
+						return;
+					}
+					var courseCode = gzipToText(formValues[0]);
+
+					const formData = new FormData();
+					formData.append('sh', formValues[0]);
+
+					fetch('/api/save_schedule.php', {
+					  method: 'POST',
+					  body: formData
+					})
+					.then(response => response.text())
+					.then(data => console.log(data))
+					.catch(error => console.error(error));
+
+					Swal.fire("Successfully Added Course!");
+			   }catch{
+					Swal.fire("Invalid Course Code");
+			   }
+			}
+		}
+	</script>
+</head>
+<body>
+	<a href="/">< Back</a><br/><br/>
+	<button onclick="enterCCode()">Enter Course Code</button>
+</body>
+</html>
