@@ -14,6 +14,7 @@ def indexredir():
 @app.route("/index.php")
 def index():
     if session.get('logged_in'):
+        verifySession()
         return render_template("index.html")
     else:
         return redirect(url_for('login'))
@@ -23,6 +24,7 @@ def index():
 @app.route("/api/check_session")
 def check_session():
     if session.get('logged_in'):
+        verifySession()
         return "yes"
     else:
         return "no"
@@ -31,6 +33,7 @@ def check_session():
 @app.route("/login.php")
 def login():
     if session.get('logged_in'):
+        verifySession()
         return redirect(url_for('index'))
     else:
         return render_template('login.html')
@@ -73,6 +76,7 @@ def loginphp():
 @app.route("/register.php")
 def register():
     if session.get('logged_in'):
+        verifySession()
         return redirect(url_for('index'))
     else:
         return render_template('register.html')
@@ -81,6 +85,7 @@ def register():
 @app.route("/api/register.php", methods=['POST'])
 def registerphp():
     if session.get('logged_in'):
+        verifySession()
         return "success"
     else:
         # session['logged_in'] = True
@@ -107,6 +112,7 @@ def registerphp():
 @app.route("/api/get_schedule.php", methods=['GET'])
 def get_schedule():
     if session.get('logged_in'):
+        verifySession()
         with open('schedules.json', 'r') as f:
             schedules = json.load(f)
         if session['username'] in schedules:
@@ -126,6 +132,7 @@ def save_schedule():
 @app.route("/my_schedule.php")
 def my_schedule():
     if session.get('logged_in'):
+        verifySession()
         with open('schedules.json', 'r') as f:
             schedules = json.load(f)
         if session['username'] in schedules:
@@ -150,6 +157,7 @@ def icsjs():
 @app.route("/api/save_schedule.php", methods=['POST'])
 def save_schedulephp():
     if session.get('logged_in'):
+        verifySession()
         scheduleHash = request.form['sh']
 
         with open('schedules.json', 'r') as f:
@@ -168,6 +176,7 @@ def save_schedulephp():
 @app.route("/add_course.php")
 def addcourse():
     if session.get('logged_in'):
+        verifySession()
         return render_template('term_selector.html')
     else:
         return redirect(url_for('login'))
@@ -176,6 +185,7 @@ def addcourse():
 @app.route("/course.php")
 def courseadd():
     if session.get('logged_in'):
+        verifySession()
         return render_template('course_term.html')
     else:
         return redirect(url_for('login'))
@@ -183,6 +193,7 @@ def courseadd():
 
 @app.route("/manage_schedule.php")
 def manageschedule():
+    verifySession()
     return render_template('manage_schedule.html')
 
 
@@ -395,7 +406,7 @@ def verifySession():
         session.pop('permission', None)
         session.pop('password', None)
         return redirect(url_for('login'))
-        
+
 if __name__ == "__main__":
     app.secret_key = 'GoHighlanderAAA'
     app.config['SESSION_TYPE'] = 'filesystem'
