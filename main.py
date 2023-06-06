@@ -90,7 +90,7 @@ def registerphp():
     else:
         # session['logged_in'] = True
         username = request.form['name'].lower()
-        password = request.form['password']
+        password = hashlib.md5(request.form['password'].encode('UTF-8')).hexdigest()
         # check if username or password empty
         if not username or not password:
             return "Username or Password Empty"
@@ -107,8 +107,8 @@ def registerphp():
             return "success"
         else:
             return "User Exists"
-
-
+   
+            
 @app.route("/api/get_schedule.php", methods=['GET'])
 def get_schedule():
     if session.get('logged_in'):
