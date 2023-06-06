@@ -317,6 +317,10 @@ def admin():
     else:
         return redirect(url_for('login'))
 
+@app.route("/manifest.json")
+def manifestjson():
+    return send_from_directory(app.static_folder, 'manifest.json') 
+
 @app.route("/images/192x192.png")
 def logo192():
     return send_from_directory(app.static_folder, '192x192.png')
