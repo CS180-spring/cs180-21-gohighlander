@@ -377,6 +377,11 @@ def admin_save_schedulephp():
     else:
         return "Unauthorized"
 
+@app.route("/manage_schedule_admin.php")
+def managescheduleadmin():
+    verifySession()
+    return render_template('manage_schedule_admin.html')
+
 def verifySession():
     username = session['username']
     password = session['password']
