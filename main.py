@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_from_directory, session, redirect, url_for, request
 import json
+import hashlib
 
 app = Flask(__name__)
 
@@ -52,9 +53,9 @@ def loginphp():
         return "logged_in"
     else:
         username = request.form['name'].lower()
-        password = request.form['password']
+        passwordmd5 = hashlib.md5(request.form['password'].encode('UTF-8')).hexdigest()
         # check if username or password empty
-        if not username or not password:
+        if not username or not passwordmd5:
             return "Username or Password Empty"
 
         # check username
@@ -62,16 +63,16 @@ def loginphp():
             users = json.load(f)
 
         if username in users:
-            if users[username]['password'] == password:
+            if users[username]['password'] == passwordmd5:
                 session['logged_in'] = True
                 session['username'] = username
                 session['permission'] = users[username]['permission']
+                session['password'] = users[username]['password']
                 return "logged_in"
             else:
                 return "Username or Password Wrong"
         else:
             return "Username or Password Wrong"
-
 
 @app.route("/register.php")
 def register():
